@@ -16,6 +16,51 @@ class SurvivantRepository extends ServiceEntityRepository
         parent::__construct($registry, Survivant::class);
     }
 
+    public function ordreDescendant(): array
+       {
+           return $this->createQueryBuilder('s')
+               ->orderBy('s.nom', 'DESC')
+               ->getQuery()
+               ->getResult()
+           ;
+       }
+
+	  public function nain($value): array
+	     {
+	         return $this->createQueryBuilder('s')
+				->leftjoin("s.race", "r")
+	             ->Where('r.id= :nain')
+			   ->setParameter(":nain",$value)
+	             ->getQuery()
+	             ->getResult()
+	         ;
+	     }
+
+		public function elf($value): array
+		   {
+		       return $this->createQueryBuilder('s')
+			  ->leftjoin("s.race", "r")
+	             ->Where('r.id= :elf')
+			   ->andWhere('s.puissance>=25')
+			   ->setParameter(":elf",$value)
+		        ->getQuery()
+		        ->getResult()
+		       ;
+		   }
+
+		   public function archer($value): array
+		   {
+		       return $this->createQueryBuilder('s')
+			  ->leftjoin("s.race", "r")
+			  ->leftjoin("s.classe", "c")
+	             ->Where('c.id= :archer')
+	             ->andWhere('r.id!=1')
+			   ->setParameter(":archer",$value)
+		        ->getQuery()
+		        ->getResult()
+		       ;
+		   }
+	 
     //    /**
     //     * @return Survivant[] Returns an array of Survivant objects
     //     */

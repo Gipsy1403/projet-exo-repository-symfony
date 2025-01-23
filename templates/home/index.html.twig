@@ -5,10 +5,10 @@
 {% block body %}
 <div class="filter">
     <a href={{path('app_home')}}>defaut</a>
-    <a href={{path('app_home' , {'filter': 'asc'} )}}>Z-A</a>
-    <a href={{path('app_home')}}>Nain</a>
-    <a href={{path('app_home')}}>Elf>=25</a>
-    <a href={{path('app_home')}}>Non Humain</a>
+    <a href={{path('app_home' , {'filter': 'DESC'} )}}>Z-A</a>
+    <a href={{path('app_home',{'filter': 'nain'})}}>Nain</a>
+    <a href={{path('app_home',{'filter': 'elf>=25'})}}>Elf>=25</a>
+    <a href={{path('app_home',{'filter': 'archernothumain'})}}>Non Humain</a>
 </div>
 <main>
 

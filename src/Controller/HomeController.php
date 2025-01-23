@@ -15,10 +15,19 @@ final class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(SurvivantRepository $repository, Request $request): Response
     {
-        //recuperation de la requête GET qu'on stocke dans $filter
-        $filter = $request->get('filter','all');
-        
-        $survivants = $repository->findAll();
+	$filter=$request->get("filter","all");
+	if($filter == 'all'){
+		$survivants = $repository->findAll();
+	}elseif($filter =="DESC"){
+		$survivants = $repository->ordreDescendant();
+     }elseif($filter =="nain"){
+		$survivants = $repository->nain(3);
+	}elseif($filter =="elf>=25"){
+		$survivants = $repository->elf(2);
+	}elseif($filter =="archernothumain"){
+		$survivants = $repository->archer(3);
+		}
+
         return $this->render('home/index.html.twig', [
             'survivants' => $survivants,
         ]);
