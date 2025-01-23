@@ -60,6 +60,16 @@ class SurvivantRepository extends ServiceEntityRepository
 		        ->getResult()
 		       ;
 		   }
+
+		   public function filtrePuissance($filter): array
+       {
+           return $this->createQueryBuilder('s')
+               ->Where('s.puissance >= :puissance')
+               ->setParameter('puissance', $filter)
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 	 
     //    /**
     //     * @return Survivant[] Returns an array of Survivant objects
