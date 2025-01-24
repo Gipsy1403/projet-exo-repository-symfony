@@ -61,15 +61,28 @@ class SurvivantRepository extends ServiceEntityRepository
 		       ;
 		   }
 
-		   public function filtrePuissance($filter): array
+		   public function filters($puissance, $race): array
        {
            return $this->createQueryBuilder('s')
-               ->Where('s.puissance >= :puissance')
-               ->setParameter('puissance', $filter)
+               ->where('s.puissance >= :puissance')
+               ->setParameter('puissance', $puissance)
+			->leftJoin("s.race", "r")
+			->andWhere('r.race_name = :race')
+			->setParameter("race",$race)
                ->getQuery()
                ->getResult()
            ;
        }
+	
+		public function sumPuissanceByRace(): array
+		{
+		return $this->createQueryBuilder('s')
+			->leftJoin("s.race", "r")
+			->select('r.race_name as racename', 'SUM(s.puissance) as totalPuissance')
+			->groupBy("r.race_name")
+			->getQuery()
+			->getScalarResult();
+		}
 	 
     //    /**
     //     * @return Survivant[] Returns an array of Survivant objects

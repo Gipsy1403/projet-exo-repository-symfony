@@ -22,10 +22,17 @@ final class FiltreSurvivantController extends AbstractController
 
 	    if($form->isSubmitted()&&$form->isValid()){
 			$data=$form->getData();
-			// dd($data["puissance"]);
-			$survivants = $repository->filtrePuissance($data["puissance"]);
+			$puissance=$data["puissance"];
+			$race=$data['race'];
+			$namerace=$race->getRaceName();
+			
+			
+			$survivants = $repository->filters($puissance,$namerace);
+			// dd($race->getRaceName());
 	    }else{
 	    		$survivants = $repository->findAll();
+			    
+			//     $survivants = $repository->filters("nain");
 		}
         return $this->render('filtre_survivant/filtreSurvivant.html.twig', [
             'survivants' => $survivants,

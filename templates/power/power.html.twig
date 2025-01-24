@@ -4,5 +4,11 @@
 
 {% block body %}
 <h1>Puissance de chaque race</h1>
+  {% for survivant in survivants %}
+	<h2>{{survivant.racename}}</h2>
+
+	<p>La puissance cumulée de la race {{survivant.racename}} est de : {{survivant.totalPuissance}}</p>
+  {% endfor %}
+
    
 {% endblock %}

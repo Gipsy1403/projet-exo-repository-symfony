@@ -7,8 +7,9 @@
     <div class="filter">
       {# --VOTRE FORMULAIRE DE FILTRE ICI-- #}
 	 {{form_start(filtreform)}}
-	 <button>Filtrer</button>
-	 	{# {{path('app_filtre_survivant' , {'filter': 'puissance_min'} )}} #}
+		{{ form_row(filtreform.puissance) }}
+    		{{ form_row(filtreform.race) }}
+	 	<button>Filtrer</button>
 	 {{form_end(filtreform)}}
     </div>
     

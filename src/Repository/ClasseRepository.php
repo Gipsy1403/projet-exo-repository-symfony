@@ -16,6 +16,8 @@ class ClasseRepository extends ServiceEntityRepository
         parent::__construct($registry, Classe::class);
     }
 
+
+
     //    /**
     //     * @return Classe[] Returns an array of Classe objects
     //     */
